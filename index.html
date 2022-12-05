@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>conexço ao MySQL</title>
+</head>
+<body leftmargin=200>
+    <center>
+<img src="mysql-logo.png">
+</br></br></br></br>
+    
+    <font face="Arial" size=6> Passos para a conexão ao MySQL </br></br></font>
+    </center>
+    <font face="Arial" size=3> Vejamos os passos que devemos seguir para realizar a conexão a um banco de dados MySQL usando um script em Python.</br>
+
+1-Ter o MySQL Server instalado, configurado e em execução na máquina local. Preferencialmente, ter um banco de dados já criado para testar a conexão.</br>
+2-É necessário instalar o conector para MySQL do Python, que pode ser instalado usando o gerenciador de pacotes pip (no prompt / terminal) com o comando a seguir:</br>
+<center><font color=ff0000 size=4>$ pip3 install mysql-connector-python</br></font></center>
+3-Com o método mysql.connector.connect() do conector MySQL Python iremos conectar o script Python ao banco de dados MySQL passando os parâmetros requeridos, que incluem o nome do host, nome do banco de dados, usuário e senha para a conexão..</br>
+4-Após efetivar a conexão usamos o objeto retornado pelo método connect() para criar um objeto cursor que permitirá realizar operações no banco de dados, como as declarações SQL para consultas, inserções, atualizações e exclusões de registros, entre outras.</br>
+5-Neste ponto podemos então executar as consultas SQL desejadas a partir do Python com o método cursor.execute().</br>
+6-Após terminar de realizar as consultas, fechamos o objeto cursor com o método cursor.close(), e também fechamos a conexão ao banco MySQL com o método connection.close() para liberar os recursos do sistema.</br>
+7-Não esquecer de capturar exceções caso algum erro possa ocorrer durante esse processo (veremos esse passo na próxima lição).</br>
+<center>
+    <font face="Arial" size=6></br>Código de conexão e teste (simplificado):</br></br></font>
+</center>
+A seguir, temos um código simplificado para o teste de conexão do Python a um banco MySQL. Não vamos aqui usar blocos try /catch nem aplicar técnicas de segurança mais robustas, pois o objetivo hoje é simplesmente mostrar como usar o módulo mysql-connector-python para criar uma conexão, criar um cursor e executar uma declaração SQL no banco selecionado.</br></br>
+
+<font color=ff0000 size=4>import mysql.connector</br>
+con = mysql.connector.connect(host='localhost',database='db_MeusLivros',user='root',password='123**')</br>
+if con.is_connected():</br>
+    db_info = con.get_server_info()</br>
+    print("Conectado ao servidor MySQL versão ",db_info)</br>
+    cursor = con.cursor()</br>
+    cursor.execute("select database();")</br>
+    linha = cursor.fetchone()</br>
+    print("Conectado ao banco de dados ",linha)</br>
+if con.is_connected():</br>
+    cursor.close()</br>
+    con.close()</br>
+    print("Conexão ao MySQL foi encerrada")</font>
+<center>
+    <font face="Arial" size=6></br></br>Resultado:</br></br></font>
+</center>
+<font size=4></font>======== RESTART: C:\Users\Boson\Downloads\Conectar-MySQL-IDLE.py</br> 
+========</br>
+<font color=054f77>Conectado ao servidor MySQL versão 5.7.13-log</br>
+Conectado ao banco de dados ('db_meuslivros',)</br>
+Conexão ao MySQL foi encerrada</br></font>
+>>></font>
+</br></br>Conexão iniciada e finalizada com sucesso ao banco de dados MySQL. Executamos também a declaração SQL do MySQL SELECT DATABASE(), a qual retorna o nome do banco de dados selecionado no momento.</br></br></br></br>
+</font>
+</body>
+</html>
